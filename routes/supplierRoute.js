@@ -34,16 +34,26 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
   try {
     let sql = "INSERT INTO Suppliers SET ?";
-    let { supplierName, supplierType, supplierLocation, supplierNumber } =
-      req.body;
+    let {
+      supplierName,
+      supplierType,
+      supplierLocation,
+      supplierNumber,
+      contactName,
+      contactNumber,
+      contactEmail,
+    } = req.body;
 
     let supplier = {
       supplierName,
       supplierType,
       supplierLocation,
       supplierNumber,
+      contactName,
+      contactNumber,
+      contactEmail,
     };
-    con.query("/", sql, supplier, (req, res) => {
+    con.query(sql, supplier, (err, result) => {
       if (err) throw err;
       res.json(`Supplier ${supplierName} has been added `);
     });

@@ -34,12 +34,14 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
   try {
     let sql = "INSERT INTO Suppliers SET ?";
-    let { supplierName, supplierType, supplierLocation } = req.body;
+    let { supplierName, supplierType, supplierLocation, supplierNumber } =
+      req.body;
 
     let supplier = {
       supplierName,
       supplierType,
       supplierLocation,
+      supplierNumber,
     };
     con.query("/", sql, supplier, (req, res) => {
       if (err) throw err;
@@ -50,4 +52,5 @@ router.post("/", (req, res) => {
     res.status(400).json(error);
   }
 });
+
 module.exports = router;
